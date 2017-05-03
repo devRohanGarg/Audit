@@ -111,6 +111,8 @@ public class MainActivity extends BaseActivity
 
         products = new ArrayList<>();
         setupRecyclerView();
+        Snackbar.make(ButterKnife.findById(MainActivity.this, R.id.coordinator_layout), "Loading", Snackbar.LENGTH_SHORT)
+                .setAction("", null).show();
         fetch();
     }
 
@@ -149,10 +151,11 @@ public class MainActivity extends BaseActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //Log.d(TAG, "Error: " + error.getMessage());
-                        Snackbar.make(ButterKnife.findById(MainActivity.this, R.id.drawer_layout), "Aw, Snap! Something went wrong", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(ButterKnife.findById(MainActivity.this, R.id.coordinator_layout), "Aw, Snap! Something went wrong", Snackbar.LENGTH_SHORT)
                                 .setAction("Action", null).show();
                     }
                 });
+
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(jsonObjReq, "JSON_OBJECT_REQUEST");
     }
@@ -275,7 +278,8 @@ public class MainActivity extends BaseActivity
 
     @OnClick(R.id.fab)
     public void onClick(View view) {
-        Snackbar.make(view, "Made with Love", Snackbar.LENGTH_LONG).setAction("", null).show();
+        Snackbar.make(view, "Refreshing", Snackbar.LENGTH_LONG).setAction("", null).show();
+        fetch();
     }
 
     @Override
