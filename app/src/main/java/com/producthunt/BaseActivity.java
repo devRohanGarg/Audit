@@ -1,4 +1,4 @@
-package com.audit;
+package com.producthunt;
 
 import android.app.ProgressDialog;
 import android.support.annotation.VisibleForTesting;

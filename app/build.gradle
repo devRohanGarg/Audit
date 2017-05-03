@@ -5,7 +5,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.audit"
+        applicationId "com.producthunt"
         minSdkVersion 14
         targetSdkVersion 25
         versionCode 1

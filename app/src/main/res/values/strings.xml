@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Audit</string>
-    <string name="company_name">Inkredo</string>
+    <string name="app_name">Product Hunt</string>
 
     <string name="twitter_consumer_key">FtnOs3KNVQ58tpJgYRaufig0y</string>
     <string name="twitter_consumer_secret">YvJWEbdqXXvz5YWGSUXPG4etZoWBRgSzJQKooPUvIZFV1YOs1C</string>

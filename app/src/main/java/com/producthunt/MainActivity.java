@@ -1,4 +1,4 @@
-package com.audit;
+package com.producthunt;
 
 import android.content.Intent;
 import android.os.Bundle;
