@@ -9,14 +9,19 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -24,6 +29,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.TwitterAuthProvider;
+import com.producthunt.adapters.RecyclerAdapter;
+import com.producthunt.models.Product;
+import com.producthunt.utils.AppController;
+import com.producthunt.utils.GridAutoFitLayoutManager;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -31,6 +40,12 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,6 +63,9 @@ public class MainActivity extends BaseActivity
     // [END declare_auth]
     private FirebaseAuth.AuthStateListener mAuthListener;
     private TwitterAuthClient mTwitterAuthClient;
+
+    private ArrayList<Product> products;
+    private RecyclerAdapter recyclerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +108,60 @@ public class MainActivity extends BaseActivity
                 login();
             }
         });
+
+        products = new ArrayList<>();
+        setupRecyclerView();
+        fetch();
+    }
+
+    private void fetch() {
+        String finalURL = getResources().getString(R.string.producthunt_base_url) + "posts?" + "&access_token=" + getResources().getString(R.string.producthunt_access_token);
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(finalURL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("posts");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Product product = new Product();
+                                product.setName(jsonObject.getString("name"));
+                                product.setTag_line(jsonObject.getString("tagline"));
+                                product.setDay(jsonObject.getString("day"));
+                                product.setDiscussion_url(jsonObject.getString("discussion_url"));
+                                product.setRedirect_url(jsonObject.getString("redirect_url"));
+                                product.setScreenshot_url(jsonObject.getJSONObject("screenshot_url").getString("300px"));
+                                product.setThumbnail_url(jsonObject.getJSONObject("thumbnail").getString("image_url"));
+                                product.setId(jsonObject.getLong("id"));
+                                product.setVotes_count(jsonObject.getLong("votes_count"));
+                                products.add(product);
+                            }
+                            recyclerAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Log.d(TAG, "Error: " + error.getMessage());
+                        Snackbar.make(ButterKnife.findById(MainActivity.this, R.id.drawer_layout), "Aw, Snap! Something went wrong", Snackbar.LENGTH_SHORT)
+                                .setAction("Action", null).show();
+                    }
+                });
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq, "JSON_OBJECT_REQUEST");
+    }
+
+    private void setupRecyclerView() {
+        RecyclerView recyclerView = ButterKnife.findById(this, R.id.product_list);
+        GridAutoFitLayoutManager layoutManager = new GridAutoFitLayoutManager(this, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 152, getApplicationContext().getResources().getDisplayMetrics()));
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerAdapter = new RecyclerAdapter(this, products);
+        recyclerView.setAdapter(recyclerAdapter);
     }
 
     // [START on_start_check_user]

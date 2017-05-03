@@ -4,9 +4,14 @@
     <string name="twitter_consumer_key">FtnOs3KNVQ58tpJgYRaufig0y</string>
     <string name="twitter_consumer_secret">YvJWEbdqXXvz5YWGSUXPG4etZoWBRgSzJQKooPUvIZFV1YOs1C</string>
 
+    <string name="producthunt_base_url">https://api.producthunt.com/v1/</string>
+    <string name="producthunt_api_key">56420ba167c1f4631f63f0d2d8c15ea93c50b9eb042c794581e852ef3a539488</string>
+    <string name="producthunt_api_secret">c814798b5bf08b39b7695f89a259aef83e24c09c8d13f59be524066b55eedb4d</string>
+    <string name="producthunt_access_token">9b37ff601e767104d2bc1f2b4af4d6f5ddc047403554898e5a7353bfaa4382e4</string>
+
     <string name="loading">Loading</string>
 
-    <string name="title_activity_main">Audit</string>
+    <string name="title_activity_main">Product Hunt</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.producthunt.R;
 import com.producthunt.R2;
 import com.producthunt.models.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
+        Picasso.with(mContext).load(products.get(position).getThumbnail_url()).placeholder(R.drawable.ui_shadow_dark).error(R.drawable.ui_shadow_dark).into(holder.imageView);
     }
 
     @Override
