@@ -6,14 +6,6 @@
     <string name="twitter_consumer_secret">YvJWEbdqXXvz5YWGSUXPG4etZoWBRgSzJQKooPUvIZFV1YOs1C</string>
 
     <string name="loading">Loading</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="signed_out">Signed Out</string>
-
-    <string name="twitter_status_fmt">Twitter User: %s</string>
-    <string name="twitter_title_text">Twitter Login</string>
-
-    <string name="firebase_status_fmt">Firebase User: %s</string>
-    <string name="desc_firebase_lockup">Firebase logo and name</string>
 
     <string name="title_activity_main">Audit</string>
 
@@ -22,10 +14,12 @@
 
     <string name="action_settings">Settings</string>
     <string name="nav_share">Share</string>
-    <string name="nav_feedback">Feedback</string>
+    <string name="nav_logout">Logout</string>
 
     <string name="content_desc">Image</string>
 
     <string name="sample_username">Username</string>
     <string name="sample_email">username@example.com</string>
+
+    <string name="login_via_twitter">Login with Twitter</string>
 </resources>
