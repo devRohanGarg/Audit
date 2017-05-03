@@ -7,9 +7,14 @@ package com.producthunt.models;
 public class Product {
 
     private String name, tag_line, day, discussion_url, redirect_url, screenshot_url, thumbnail_url;
-    private long id, votes_count;
+    private long id, comments_count, votes_count;
 
-    public Product() {
+    public long getComments_count() {
+        return comments_count;
+    }
+
+    public void setComments_count(long comments_count) {
+        this.comments_count = comments_count;
     }
 
     public String getName() {

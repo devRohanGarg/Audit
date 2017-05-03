@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="@dimen/card_corner_radius"
@@ -12,14 +13,15 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/cardImage"
+            android:id="@+id/thumbnail"
             android:layout_width="match_parent"
             android:layout_height="224dp"
             android:layout_alignParentTop="true"
+            android:contentDescription="@string/content_desc"
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/cardTitle"
+            android:id="@+id/name"
             style="?android:attr/textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,19 +35,20 @@
             android:gravity="center"
             android:lines="4"
             android:padding="8dp"
-            android:text="Title"
             android:textAllCaps="true"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="Name" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cardImage"
+            android:layout_below="@+id/thumbnail"
             android:orientation="horizontal"
             android:paddingTop="8dp">
 
             <TextView
-                android:id="@+id/cardPopularity"
+                android:id="@+id/comments_count"
                 style="?android:attr/textAppearanceSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -56,23 +59,23 @@
                 android:drawableStart="@drawable/ic_whatshot_black"
                 android:gravity="start"
                 android:maxLines="1"
-                android:text="100%"
-                android:textSize="12sp" />
+                android:textStyle="bold"
+                tools:text="17" />
 
             <TextView
-                android:id="@+id/cardRating"
+                android:id="@+id/up_votes"
                 style="?android:attr/textAppearanceSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:alpha="0.7"
-                android:drawableEnd="@drawable/ic_star_rate_black"
-                android:drawablePadding="4dp"
-                android:drawableRight="@drawable/ic_star_rate_black"
+                android:drawableEnd="@drawable/ic_thumb_up_black"
+                android:drawablePadding="8dp"
+                android:drawableRight="@drawable/ic_thumb_up_black"
                 android:gravity="end"
                 android:maxLines="1"
-                android:text="5.0"
-                android:textSize="12sp" />
+                android:textStyle="bold"
+                tools:text="980" />
 
         </LinearLayout>
 

@@ -36,8 +36,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        Picasso.with(mContext).load(products.get(position).getThumbnail_url()).placeholder(R.drawable.ui_shadow_dark).error(R.drawable.ui_shadow_dark).into(holder.imageView);
+        holder.name.setText(products.get(position).getName());
+        holder.comments_count.setText(String.valueOf(products.get(position).getComments_count()));
+        holder.up_votes.setText(String.valueOf(products.get(position).getVotes_count()));
+        Picasso.with(mContext).load(products.get(position).getThumbnail_url()).placeholder(R.drawable.ui_shadow_dark).error(R.drawable.ui_shadow_dark).into(holder.thumbnail);
     }
 
     @Override
@@ -46,16 +48,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R2.id.cardTitle)
-        TextView title;
-        @BindView(R2.id.cardRating)
-        TextView rating;
-        @BindView(R2.id.cardPopularity)
-        TextView popularity;
-        @BindView(R2.id.cardImage)
-        ImageView imageView;
+        @BindView(R2.id.name)
+        TextView name;
+        @BindView(R2.id.comments_count)
+        TextView comments_count;
+        @BindView(R2.id.up_votes)
+        TextView up_votes;
+        @BindView(R2.id.thumbnail)
+        ImageView thumbnail;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

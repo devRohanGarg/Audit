@@ -135,6 +135,7 @@ public class MainActivity extends BaseActivity
                                 product.setScreenshot_url(jsonObject.getJSONObject("screenshot_url").getString("300px"));
                                 product.setThumbnail_url(jsonObject.getJSONObject("thumbnail").getString("image_url"));
                                 product.setId(jsonObject.getLong("id"));
+                                product.setComments_count(jsonObject.getLong("comments_count"));
                                 product.setVotes_count(jsonObject.getLong("votes_count"));
                                 products.add(product);
                             }
