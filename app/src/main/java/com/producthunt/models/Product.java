@@ -1,13 +1,43 @@
 package com.producthunt.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created on 03-05-2017.
  */
 
-public class Product {
+public class Product implements Parcelable {
 
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
     private String name, tag_line, day, discussion_url, redirect_url, screenshot_url, thumbnail_url;
     private long id, comments_count, votes_count;
+
+    public Product() {
+    }
+
+    protected Product(Parcel in) {
+        name = in.readString();
+        tag_line = in.readString();
+        day = in.readString();
+        discussion_url = in.readString();
+        redirect_url = in.readString();
+        screenshot_url = in.readString();
+        thumbnail_url = in.readString();
+        id = in.readLong();
+        comments_count = in.readLong();
+        votes_count = in.readLong();
+    }
 
     public long getComments_count() {
         return comments_count;
@@ -87,5 +117,24 @@ public class Product {
 
     public void setVotes_count(long votes_count) {
         this.votes_count = votes_count;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(tag_line);
+        parcel.writeString(day);
+        parcel.writeString(discussion_url);
+        parcel.writeString(redirect_url);
+        parcel.writeString(screenshot_url);
+        parcel.writeString(thumbnail_url);
+        parcel.writeLong(id);
+        parcel.writeLong(comments_count);
+        parcel.writeLong(votes_count);
     }
 }

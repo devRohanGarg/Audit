@@ -29,7 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.TwitterAuthProvider;
-import com.producthunt.adapters.RecyclerAdapter;
+import com.producthunt.adapters.ProductAdapter;
 import com.producthunt.models.Product;
 import com.producthunt.utils.AppController;
 import com.producthunt.utils.GridAutoFitLayoutManager;
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity
     private TwitterAuthClient mTwitterAuthClient;
 
     private ArrayList<Product> products;
-    private RecyclerAdapter recyclerAdapter;
+    private ProductAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +141,7 @@ public class MainActivity extends BaseActivity
                                 product.setVotes_count(jsonObject.getLong("votes_count"));
                                 products.add(product);
                             }
-                            recyclerAdapter.notifyDataSetChanged();
+                            productAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -164,8 +164,8 @@ public class MainActivity extends BaseActivity
         RecyclerView recyclerView = ButterKnife.findById(this, R.id.product_list);
         GridAutoFitLayoutManager layoutManager = new GridAutoFitLayoutManager(this, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 152, getApplicationContext().getResources().getDisplayMetrics()));
         recyclerView.setLayoutManager(layoutManager);
-        recyclerAdapter = new RecyclerAdapter(this, products);
-        recyclerView.setAdapter(recyclerAdapter);
+        productAdapter = new ProductAdapter(this, products);
+        recyclerView.setAdapter(productAdapter);
     }
 
     // [START on_start_check_user]
@@ -276,9 +276,10 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @OnClick(R.id.fab)
+    @OnClick(R2.id.fab)
     public void onClick(View view) {
         Snackbar.make(view, "Refreshing", Snackbar.LENGTH_LONG).setAction("", null).show();
+        products = new ArrayList<>();
         fetch();
     }
 

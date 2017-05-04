@@ -26,4 +26,5 @@
     <string name="sample_email">username@example.com</string>
 
     <string name="login_via_twitter">Login with Twitter</string>
+    <string name="title_activity_detail">Product Detail</string>
 </resources>

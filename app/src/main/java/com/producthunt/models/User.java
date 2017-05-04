@@ -9,6 +9,9 @@ public class User {
     private String name, user_name, profile_url, image_url;
     private long id;
 
+    public User() {
+    }
+
     public long getId() {
         return id;
     }
