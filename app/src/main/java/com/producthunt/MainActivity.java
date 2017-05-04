@@ -279,7 +279,8 @@ public class MainActivity extends BaseActivity
     @OnClick(R2.id.fab)
     public void onClick(View view) {
         Snackbar.make(view, "Refreshing", Snackbar.LENGTH_LONG).setAction("", null).show();
-        products = new ArrayList<>();
+        products.clear();
+        productAdapter.notifyDataSetChanged();
         fetch();
     }
 
